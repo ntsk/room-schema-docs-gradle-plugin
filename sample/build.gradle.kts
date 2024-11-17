@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("jp.ntsk.room-schema-docs-gradle-plugin") version "1.0.0"
+    id("jp.ntsk.room-schema-docs") version "1.0.0"
 }
 
 android {

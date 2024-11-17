@@ -29,11 +29,10 @@ version = "1.0.0"
 gradlePlugin {
     plugins {
         create("roomSchemaDocsPlugin") {
-            id = "jp.ntsk.room-schema-docs-gradle-plugin"
+            id = "jp.ntsk.room-schema-docs"
             implementationClass = "jp.ntsk.room.schema.docs.plugin.RoomSchemaDocsPlugin"
         }
     }
-    isAutomatedPublishing = false
 }
 
 dependencies {
@@ -41,24 +40,6 @@ dependencies {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("pluginMaven") {
-            from(components["java"])
-
-            pom {
-                name.set("room-schema-docs-gradle-plugin")
-                description.set("A Gradle plugin for generating Room schema documentation.")
-                url.set("https://github.com/ntsk/room-schema-docs-gradle-plugin")
-                licenses {
-                    license {
-                        name.set("Apache License 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                    }
-                }
-                artifactId = "room-schema-docs-gradle-plugin"
-            }
-        }
-    }
     repositories {
         mavenLocal()
     }
