@@ -45,3 +45,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+roomSchemaDocs {
+    schemaDir = "$projectDir/schemas"
+    outputDir = "$projectDir/docs"
+}
