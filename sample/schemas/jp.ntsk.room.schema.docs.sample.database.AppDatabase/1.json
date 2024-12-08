@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c10c80633311b413ef04514f098b63d1",
+    "identityHash": "562791c404250e356e1e8487ec958ec1",
     "entities": [
       {
         "tableName": "tasks",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `status` INTEGER NOT NULL, `due_at` INTEGER NOT NULL, `created_at` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `status` INTEGER NOT NULL, `due_at` INTEGER NOT NULL, `project_id` INTEGER, `created_at` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -39,6 +39,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "projectId",
+            "columnName": "project_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
             "fieldPath": "createdAt",
             "columnName": "created_at",
             "affinity": "INTEGER",
@@ -58,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c10c80633311b413ef04514f098b63d1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '562791c404250e356e1e8487ec958ec1')"
     ]
   }
 }

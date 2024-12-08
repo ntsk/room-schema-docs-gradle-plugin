@@ -24,8 +24,13 @@ fun MainScreen() {
                 }
             )
         }
+
         composable<Screens.TaskDetail> {
             TaskDetailScreen(onClickArrowBack = { navController.popBackStack() })
+        }
+
+        composable<Screens.Projects> {
+
         }
     }
 }

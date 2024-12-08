@@ -210,6 +210,7 @@ private fun TasksScreenPreview() {
                         title = "Buy groceries",
                         description = "Buy milk, eggs, bread, and some fresh vegetables from the supermarket.",
                         status = Task.Status.Todo,
+                        project = null,
                         createdAt = OffsetDateTime.now(),
                         dueAt = OffsetDateTime.now().plusDays(3)
                     ),
@@ -218,6 +219,7 @@ private fun TasksScreenPreview() {
                         title = "Prepare presentation",
                         description = "Finalize slides and add notes for the client meeting presentation.",
                         status = Task.Status.InProgress,
+                        project = null,
                         createdAt = OffsetDateTime.now(),
                         dueAt = OffsetDateTime.now().plusDays(4)
                     ),
@@ -226,6 +228,7 @@ private fun TasksScreenPreview() {
                         title = "Call the plumber",
                         description = "Discuss the leaking pipe issue and arrange a time for repair.",
                         status = Task.Status.Done,
+                        project = null,
                         createdAt = OffsetDateTime.now(),
                         dueAt = OffsetDateTime.now().plusDays(5)
                     ),
@@ -234,6 +237,7 @@ private fun TasksScreenPreview() {
                         title = "Workout session",
                         description = "Complete a 45-minute cardio workout followed by 15 minutes of stretching.",
                         status = Task.Status.Archived,
+                        project = null,
                         createdAt = OffsetDateTime.now(),
                         dueAt = OffsetDateTime.now().plusDays(6)
                     )

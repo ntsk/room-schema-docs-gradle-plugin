@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 class TasksRepository @Inject constructor(
-    private val taskDao: TaskDao
+    private val taskDao: TaskDao,
 ) {
 
     suspend fun add(task: Task): Long = taskDao.insert(task.toEntity())
@@ -24,5 +24,5 @@ class TasksRepository @Inject constructor(
         }
 
     fun getById(id: Long): Flow<Task?> =
-        taskDao.getTaskById(id).map { it?.toModel() }
+        taskDao.getTaskById(id).map { it?.task?.toModel(it.project?.toModel()) }
 }

@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import jp.ntsk.room.schema.docs.sample.database.AppDatabase
 import jp.ntsk.room.schema.docs.sample.database.AppDatabaseFactory
+import jp.ntsk.room.schema.docs.sample.database.ProjectDao
 import jp.ntsk.room.schema.docs.sample.database.TaskDao
 import javax.inject.Singleton
 
@@ -23,5 +24,11 @@ class RoomModule {
     @Singleton
     fun provideTaskDao(appDatabase: AppDatabase): TaskDao {
         return appDatabase.taskDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideProjectDao(appDatabase: AppDatabase): ProjectDao {
+        return appDatabase.projectDao
     }
 }

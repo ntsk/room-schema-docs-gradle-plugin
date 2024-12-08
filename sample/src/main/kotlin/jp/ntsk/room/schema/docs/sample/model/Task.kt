@@ -12,8 +12,9 @@ data class Task(
     val title: String,
     val description: String,
     val status: Status,
-    val createdAt: OffsetDateTime,
+    val project: Project?,
     val dueAt: OffsetDateTime,
+    val createdAt: OffsetDateTime,
 ) {
     enum class Status(val id: Int, val label: String, val color: Color) {
         None(0, "None", Color.White),
@@ -28,23 +29,6 @@ data class Task(
             }
         }
     }
-
-    companion object {
-        fun createNewTask() = Task(
-            id = 0,
-            title = "",
-            description = "",
-            status = Task.Status.None,
-            OffsetDateTime.ofInstant(
-                Instant.ofEpochSecond(System.currentTimeMillis()),
-                ZoneOffset.UTC
-            ),
-            dueAt = OffsetDateTime.ofInstant(
-                Instant.ofEpochSecond(System.currentTimeMillis()),
-                ZoneOffset.UTC
-            ).plusDays(7)
-        )
-    }
 }
 
 fun Task.toEntity(): TaskEntity = TaskEntity(
@@ -56,11 +40,14 @@ fun Task.toEntity(): TaskEntity = TaskEntity(
     dueAt = this.dueAt.toEpochSecond()
 )
 
-fun TaskEntity.toModel(): Task = Task(
+fun TaskEntity.toModel(
+    project: Project? = null
+): Task = Task(
     id = this.id,
     title = this.title,
     description = this.description,
     status = findStatusById(this.status),
+    project = project,
     createdAt = OffsetDateTime.ofInstant(
         Instant.ofEpochSecond(this.createdAt),
         ZoneOffset.UTC

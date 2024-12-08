@@ -210,6 +210,7 @@ private fun TaskDetailColumn(
                             description = description,
                             status = status,
                             dueAt = dueAt,
+                            project = null, // TODO
                             createdAt = OffsetDateTime.now(),
                         )
                     )
@@ -229,7 +230,7 @@ private fun TaskDetailColumn(
             Text("Save")
         }
 
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(8.dp))
 
         OutlinedButton(
             modifier = Modifier.fillMaxWidth(),
@@ -243,6 +244,7 @@ private fun TaskDetailColumn(
                             description = description,
                             status = status,
                             dueAt = dueAt,
+                            project = null, // TODO
                             createdAt = OffsetDateTime.now(),
                         )
                     )
