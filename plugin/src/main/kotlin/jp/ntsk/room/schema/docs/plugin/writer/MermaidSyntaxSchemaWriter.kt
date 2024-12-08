@@ -31,11 +31,18 @@ class MermaidSyntaxSchemaWriter : SchemaWriter {
             append(CODE_SYNTAX_START)
             append("\n")
             append(ER_DIAGRAM)
-            append("\n")
-            append(tables)
-            append("\n\n")
-            append(relations)
-            append("\n")
+
+            if (tables.isNotEmpty()) {
+                append("\n")
+                append(tables)
+                append("\n")
+            }
+            if (relations.isNotEmpty()) {
+                append("\n")
+                append(relations)
+                append("\n")
+            }
+
             append(CODE_SYNTAX_END)
         }
     }

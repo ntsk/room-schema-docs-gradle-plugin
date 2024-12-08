@@ -18,14 +18,9 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
             doLast {
                 val schemaDir = File(extension.schemaDir)
                 val outputDir = File(extension.outputDir)
-                val files = schemaDir.listFiles()
 
                 if (!schemaDir.exists()) {
                     throw IllegalArgumentException("Schema directory does not exist: ${extension.schemaDir}")
-                }
-
-                if (files.isNullOrEmpty()) {
-                    throw IllegalArgumentException("Schema files does not exist: ${extension.schemaDir}")
                 }
 
                 if (!outputDir.exists()) {
@@ -35,14 +30,27 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
                 val serializer = SchemaSerializer()
                 val writer = MermaidSyntaxSchemaWriter()
 
-                files
-                    .filter { file -> file.extension == "json" }
+                val jsonFiles = schemaDir.walkTopDown()
+                    .filter { it.isFile && it.extension == "json" }
+                    .toList()
+
+                if (jsonFiles.isEmpty()) {
+                    throw IllegalArgumentException("No schema files found in directory or subdirectories: ${extension.schemaDir}")
+                }
+
+                jsonFiles
                     .forEach { file ->
+                        println(file.toPath())
+
+                        val relativePath = schemaDir.toPath().relativize(file.toPath()).toString()
+                        val outputFile = File(outputDir, relativePath.replace(".json", ".md"))
+                        outputFile.parentFile.mkdirs()
+
                         val roomSchema = serializer.serialize(file)
                         val erDiagram = writer.write(roomSchema)
-                        val output = File(outputDir, "${roomSchema.database.version}.md")
-                        output.writeText(erDiagram)
-                        println("Generated ER diagram: ${output.absolutePath}")
+
+                        outputFile.writeText(erDiagram)
+                        println("Generated ER diagram: ${outputFile.absolutePath}")
                     }
             }
         }
