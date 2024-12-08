@@ -86,5 +86,5 @@ dependencies {
 
 roomSchemaDocs {
     schemaDir = "$projectDir/schemas"
-    outputDir = "$projectDir/schemas/docs"
+    outputDir = "$projectDir/schemas-docs"
 }
