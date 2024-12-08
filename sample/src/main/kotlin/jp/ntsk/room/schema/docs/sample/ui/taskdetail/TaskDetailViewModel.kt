@@ -39,4 +39,8 @@ class TaskDetailViewModel @Inject constructor(
     fun save(task: Task) = viewModelScope.launch {
         tasksRepository.add(task)
     }
+
+    fun delete(task: Task) = viewModelScope.launch {
+        tasksRepository.delete(task)
+    }
 }

@@ -16,6 +16,8 @@ class TasksRepository @Inject constructor(
 
     suspend fun add(task: Task): Long = taskDao.insert(task.toEntity())
 
+    suspend fun delete(task: Task) = taskDao.delete(task.toEntity())
+
     fun get(): Flow<List<Task>> =
         taskDao.getTasksOrderByCreatedAt().map { entities ->
             entities.map { it.toModel() }

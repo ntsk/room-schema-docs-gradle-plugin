@@ -75,13 +75,7 @@ private fun TasksScreen(
                         Row(
                             modifier = Modifier
                                 .align(Alignment.Center)
-                                .padding(end = 24.dp)
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.Done,
-                                contentDescription = "icon"
-                            )
-                            Spacer(modifier = Modifier.size(8.dp))
                             Text(text = "Tasks")
                         }
                     }

@@ -1,6 +1,7 @@
 package jp.ntsk.room.schema.docs.sample.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import jp.ntsk.room.schema.docs.sample.entity.TaskEntity
@@ -12,6 +13,9 @@ import javax.inject.Singleton
 interface TaskDao {
     @Upsert
     suspend fun insert(taskEntity: TaskEntity): Long
+
+    @Delete
+    suspend fun delete(taskEntity: TaskEntity)
 
     @Query("SELECT * FROM tasks ORDER BY created_at DESC")
     fun getTasksOrderByCreatedAt(): Flow<List<TaskEntity>>

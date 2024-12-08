@@ -28,6 +28,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -62,7 +63,8 @@ fun TaskDetailScreen(
     TaskDetailScreen(
         uiState = uiState,
         onClickArrowBack = onClickArrowBack,
-        onSaved = { viewModel.save(it) }
+        onSaved = { viewModel.save(it) },
+        onDelete = { viewModel.delete(it) }
     )
 }
 
@@ -72,6 +74,7 @@ private fun TaskDetailScreen(
     uiState: TaskDetailUiState,
     onClickArrowBack: () -> Unit,
     onSaved: (Task) -> Unit,
+    onDelete: (Task) -> Unit,
 ) {
 
     Scaffold(
@@ -97,6 +100,10 @@ private fun TaskDetailScreen(
                     onSaved = {
                         onSaved(it)
                         onClickArrowBack()
+                    },
+                    onDelete = {
+                        onDelete(it)
+                        onClickArrowBack()
                     }
                 )
             }
@@ -107,6 +114,10 @@ private fun TaskDetailScreen(
                     task = null,
                     onSaved = {
                         onSaved(it)
+                        onClickArrowBack()
+                    },
+                    onDelete = {
+                        onDelete(it)
                         onClickArrowBack()
                     }
                 )
@@ -130,6 +141,7 @@ private fun TaskDetailColumn(
     modifier: Modifier = Modifier,
     task: Task?,
     onSaved: (Task) -> Unit,
+    onDelete: (Task) -> Unit,
 ) {
     var editedTask by remember { mutableStateOf(task) }
     var title by remember { mutableStateOf(task?.title.orEmpty()) }
@@ -215,6 +227,39 @@ private fun TaskDetailColumn(
             }
         ) {
             Text("Save")
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        OutlinedButton(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                val deleteTask = editedTask
+                if (deleteTask == null) {
+                    onDelete(
+                        Task(
+                            id = 0,
+                            title = title,
+                            description = description,
+                            status = status,
+                            dueAt = dueAt,
+                            createdAt = OffsetDateTime.now(),
+                        )
+                    )
+                } else {
+                    onDelete(
+                        deleteTask.copy(
+                            title = title,
+                            description = description,
+                            status = status,
+                            dueAt = dueAt,
+                        )
+                    )
+                }
+                editedTask = deleteTask
+            }
+        ) {
+            Text("Delete")
         }
     }
 }
@@ -343,7 +388,8 @@ fun TaskDetailScreenPreview() {
         TaskDetailScreen(
             uiState = TaskDetailUiState.New,
             onClickArrowBack = {},
-            onSaved = {}
+            onSaved = {},
+            onDelete = {}
         )
     }
 }
