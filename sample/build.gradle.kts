@@ -41,9 +41,6 @@ android {
     buildFeatures {
         compose = true
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
 }
 
 dependencies {
@@ -81,7 +78,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+}
 
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 roomSchemaDocs {
