@@ -23,7 +23,7 @@ class MermaidSyntaxSchemaWriter : SchemaWriter {
             entity.foreignKeys.map { foreignKey ->
                 val relationLabel =
                     foreignKey.columns.joinToString(", ") { column -> "FK($column)" }
-                "${entity.tableName} ||--o{ ${foreignKey.table} : \"$relationLabel\""
+                "${foreignKey.table} ||--o{ ${entity.tableName} : \"$relationLabel\""
             }
         }.joinToString("\n")
 
