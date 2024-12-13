@@ -6,7 +6,7 @@ import androidx.room.Embedded
 import androidx.room.Query
 import androidx.room.Relation
 import androidx.room.Upsert
-import jp.ntsk.room.schema.docs.sample.entity.ProjectEntity
+import jp.ntsk.room.schema.docs.sample.entity.SubTaskEntity
 import jp.ntsk.room.schema.docs.sample.entity.TaskEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton
@@ -24,14 +24,14 @@ interface TaskDao {
     fun getTasksOrderByCreatedAt(): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM tasks WHERE id = :id")
-    fun getTaskById(id: Long): Flow<TaskWithProjectEntity?>
+    fun getTaskById(id: Long): Flow<TaskWithSubTasksEntity>
 }
 
-data class TaskWithProjectEntity(
+data class TaskWithSubTasksEntity(
     @Embedded val task: TaskEntity,
     @Relation(
-        parentColumn = "project_id",
-        entityColumn = "id"
+        parentColumn = "id",
+        entityColumn = "task_id"
     )
-    val project: ProjectEntity?
+    val subTask: List<SubTaskEntity>
 )

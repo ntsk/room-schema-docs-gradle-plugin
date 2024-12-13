@@ -2,20 +2,9 @@ package jp.ntsk.room.schema.docs.sample.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = "tasks",
-    foreignKeys = [
-        ForeignKey(
-            entity = ProjectEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["project_id"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
-)
+@Entity(tableName = "tasks")
 data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -32,9 +21,6 @@ data class TaskEntity(
 
     @ColumnInfo(name = "due_at")
     val dueAt: Long,
-
-    @ColumnInfo(name = "project_id")
-    val projectId: Long? = null,
 
     @ColumnInfo(name = "created_at")
     val createdAt: Long = System.currentTimeMillis(),

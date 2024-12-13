@@ -15,7 +15,7 @@ data class Task(
     val title: String,
     val description: String,
     val status: Status,
-    val project: Project?,
+    val subTasks: List<SubTask>,
     val dueAt: OffsetDateTime,
     val createdAt: OffsetDateTime,
 ) {
@@ -44,13 +44,13 @@ fun Task.toEntity(): TaskEntity = TaskEntity(
 )
 
 fun TaskEntity.toModel(
-    project: Project? = null
+    subTasks: List<SubTask> = emptyList()
 ): Task = Task(
     id = this.id,
     title = this.title,
     description = this.description,
     status = findStatusById(this.status),
-    project = project,
+    subTasks = subTasks,
     createdAt = OffsetDateTime.ofInstant(
         Instant.ofEpochSecond(this.createdAt),
         ZoneOffset.UTC

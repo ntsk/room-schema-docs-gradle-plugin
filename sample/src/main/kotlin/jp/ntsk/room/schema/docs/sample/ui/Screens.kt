@@ -4,9 +4,6 @@ import kotlinx.serialization.Serializable
 
 sealed interface Screens {
     @Serializable
-    data object Projects : Screens
-
-    @Serializable
     data object Tasks : Screens
 
     @Serializable

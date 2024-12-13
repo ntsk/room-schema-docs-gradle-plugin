@@ -209,8 +209,8 @@ private fun TaskDetailColumn(
                             title = title,
                             description = description,
                             status = status,
+                            subTasks = emptyList(),
                             dueAt = dueAt,
-                            project = null, // TODO
                             createdAt = OffsetDateTime.now(),
                         )
                     )
@@ -244,7 +244,7 @@ private fun TaskDetailColumn(
                             description = description,
                             status = status,
                             dueAt = dueAt,
-                            project = null, // TODO
+                            subTasks = emptyList(),
                             createdAt = OffsetDateTime.now(),
                         )
                     )

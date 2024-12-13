@@ -24,5 +24,11 @@ class TasksRepository @Inject constructor(
         }
 
     fun getById(id: Long): Flow<Task?> =
-        taskDao.getTaskById(id).map { it?.task?.toModel(it.project?.toModel()) }
+        taskDao.getTaskById(id)
+            .map { taskWithSubTasks ->
+                taskWithSubTasks.task.toModel(
+                    subTasks = taskWithSubTasks.subTask?.map { subTaskEntity ->
+                        subTaskEntity.toModel()
+                    } ?: emptyList())
+            }
 }
