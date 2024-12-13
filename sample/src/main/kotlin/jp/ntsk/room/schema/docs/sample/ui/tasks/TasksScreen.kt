@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -19,21 +20,34 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.Card
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.filled.SortByAlpha
+import androidx.compose.material.icons.filled.TaskAlt
+import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,6 +56,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import jp.ntsk.room.schema.docs.sample.model.Task
 import jp.ntsk.room.schema.docs.sample.theme.SampleAppTheme
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun TasksScreen(
@@ -72,12 +87,11 @@ private fun TasksScreen(
                     Box(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                        ) {
-                            Text(text = "Tasks")
-                        }
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = "Tasks",
+                            textAlign = TextAlign.Center,
+                        )
                     }
                 })
         },
@@ -118,8 +132,7 @@ private fun TasksLazyColumn(
     onClickTask: (Task) -> Unit,
 ) {
     LazyColumn(
-        modifier = modifier.padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier.fillMaxWidth(),
     ) {
         items(tasks) {
             TaskItem(
@@ -136,31 +149,56 @@ private fun TaskItem(
     task: Task,
     onClickTask: (Task) -> Unit,
 ) {
-    Card(
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onClickTask(task) }
+            .clickable { onClickTask(task) },
     ) {
-        Column(
-            modifier = Modifier
+        Row(
+            modifier = modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text(
-                text = task.title,
-                fontSize = 21.sp
+            Icon(
+                modifier = Modifier.align(Alignment.CenterVertically),
+                imageVector =
+                if (task.status == Task.Status.Done || task.status == Task.Status.Archived) {
+                    Icons.Default.TaskAlt
+                } else {
+                    Icons.Outlined.Circle
+                },
+                contentDescription = "Localized description"
             )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = task.description,
-                fontSize = 12.sp,
-                maxLines = 2
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            TaskStatusLabel(
-                modifier = Modifier.align(Alignment.End),
-                status = task.status
-            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
+                Text(
+                    text = task.title,
+                    fontSize = 16.sp
+                )
+                Spacer(modifier = Modifier.size(4.dp))
+                Text(
+                    text = task.description,
+                    fontSize = 10.sp,
+                    maxLines = 2,
+                )
+                Spacer(modifier = Modifier.size(4.dp))
+                Row {
+                    TaskStatusLabel(
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                        status = task.status
+                    )
+                    Spacer(modifier = Modifier.size(4.dp))
+                    TaskDueDateLabel(
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                        dueDate = task.dueAt
+                    )
+                }
+            }
         }
     }
 }
@@ -182,7 +220,7 @@ private fun TaskStatusLabel(
         Spacer(modifier = Modifier.width(8.dp))
         Box(
             modifier = Modifier
-                .size(12.dp)
+                .size(10.dp)
                 .background(color = status.color, shape = CircleShape)
         )
 
@@ -190,6 +228,35 @@ private fun TaskStatusLabel(
 
         Text(
             text = status.label,
+            fontSize = 10.sp
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+    }
+}
+
+@Composable
+private fun TaskDueDateLabel(
+    modifier: Modifier = Modifier,
+    dueDate: OffsetDateTime
+) {
+    Row(
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = Color.LightGray,
+                shape = RoundedCornerShape(16.dp)
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Spacer(modifier = Modifier.width(8.dp))
+        Icon(
+            modifier = Modifier.size(16.dp),
+            imageVector = Icons.Default.DateRange, contentDescription = "date"
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = dueDate.format(DateTimeFormatter.ISO_LOCAL_DATE),
+            fontSize = 10.sp
         )
         Spacer(modifier = Modifier.width(8.dp))
     }
