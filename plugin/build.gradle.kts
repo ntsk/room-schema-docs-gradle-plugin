@@ -60,3 +60,9 @@ signing {
     useGpgCmd()
     sign(publishing.publications)
 }
+
+tasks.withType<Sign>().configureEach {
+    onlyIf("Skip when publishing to mavenLocal") {
+        !gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }
+    }
+}
