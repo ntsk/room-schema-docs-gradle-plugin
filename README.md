@@ -4,8 +4,7 @@
 A Gradle plugin to automatically generate Entity-Relationship (ER) diagrams in Mermaid format from Android Room database schema JSON files.
 
 ## Features
-
-- Converts Room schema JSON files into ER diagrams in [Mermaid](https://mermaid.js.org/syntax/entityRelationshipDiagram.html#entity-relationship-diagrams) syntax.
+- Generates ER diagrams in [Mermaid](https://mermaid.js.org/syntax/entityRelationshipDiagram.html#entity-relationship-diagrams) syntax based on Room schema JSON files.
 - Outputs diagrams embedded in Markdown files, making it easy to review schema relationships and manage database changes over time.
 
 ## Getting Started
