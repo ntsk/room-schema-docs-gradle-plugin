@@ -22,10 +22,7 @@ private const val APP_DB_VERSION = 3
         AutoMigration(from = 2, to = 3, spec = AutoMigrationSpec2To3::class)
     ]
 )
-abstract class AppDatabase : RoomDatabase() {
-    abstract val taskDao: TaskDao
-    abstract val subTaskDao: SubTaskDao
-}
+abstract class AppDatabase : RoomDatabase()
 
 @DeleteTable(tableName = "projects")
 @DeleteColumn.Entries(
