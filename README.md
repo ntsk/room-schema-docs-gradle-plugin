@@ -1,4 +1,5 @@
 # Room Schema Docs Gradle Plugin
+![build](https://github.com/ntsk/room-schema-docs-gradle-plugin/actions/workflows/build.yml/badge.svg)
 
 A Gradle plugin to automatically generate Entity-Relationship (ER) diagrams in Mermaid format from Android Room database schema JSON files.
 
