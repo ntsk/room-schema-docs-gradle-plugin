@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Build Gradle Plugin and Sample App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build Gradle Plugin
+        run: ./gradlew :plugin:build
+
+      - name: Build Sample App (assembleDebug)
+        run: ./gradlew :sample:assembleDebug
+
+      - name: Generate Schema Docs
+        run: ./gradlew :sample:generateRoomSchemaDocs
