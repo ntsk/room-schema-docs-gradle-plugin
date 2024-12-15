@@ -1,6 +1,8 @@
 pluginManagement {
     repositories {
-        mavenLocal()
+        if (System.getenv("PLUGIN_ONLY")?.toBoolean() != true) {
+            mavenLocal()
+        }
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -15,12 +17,16 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenLocal()
+        if (System.getenv("PLUGIN_ONLY")?.toBoolean() != true) {
+            mavenLocal()
+        }
         google()
         mavenCentral()
     }
 }
 
 rootProject.name = "room-schema-docs-gradle-plugin"
-include(":sample")
+if (System.getenv("PLUGIN_ONLY")?.toBoolean() != true) {
+    include(":sample")
+}
 include(":plugin")
