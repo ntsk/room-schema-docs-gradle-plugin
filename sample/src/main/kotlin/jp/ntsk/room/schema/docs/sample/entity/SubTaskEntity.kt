@@ -3,6 +3,7 @@ package jp.ntsk.room.schema.docs.sample.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -14,6 +15,9 @@ import androidx.room.PrimaryKey
             childColumns = ["task_id"],
             onDelete = ForeignKey.CASCADE
         )
+    ],
+    indices = [
+        Index(value = ["task_id"])
     ]
 )
 data class SubTaskEntity(

@@ -3,6 +3,7 @@ package jp.ntsk.room.schema.docs.sample.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -20,6 +21,10 @@ import androidx.room.PrimaryKey
             childColumns = ["assignee_id"],
             onDelete = ForeignKey.SET_NULL
         ),
+    ],
+    indices = [
+        Index(value = ["author_id"]),
+        Index(value = ["assignee_id"]),
     ]
 )
 data class TaskEntity(

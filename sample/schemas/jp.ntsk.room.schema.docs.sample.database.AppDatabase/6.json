@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "76e2c738ed5f0002ae8df2a046be876f",
+    "identityHash": "ef824e1b85fbc68b9f05877c03c14254",
     "entities": [
       {
         "tableName": "tasks",
@@ -63,7 +63,26 @@
             "id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_tasks_author_id",
+            "unique": false,
+            "columnNames": [
+              "author_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_author_id` ON `${TABLE_NAME}` (`author_id`)"
+          },
+          {
+            "name": "index_tasks_assignee_id",
+            "unique": false,
+            "columnNames": [
+              "assignee_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_tasks_assignee_id` ON `${TABLE_NAME}` (`assignee_id`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "users",
@@ -124,7 +143,17 @@
             "id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_sub_tasks_task_id",
+            "unique": false,
+            "columnNames": [
+              "task_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sub_tasks_task_id` ON `${TABLE_NAME}` (`task_id`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "tasks",
@@ -289,7 +318,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '76e2c738ed5f0002ae8df2a046be876f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ef824e1b85fbc68b9f05877c03c14254')"
     ]
   }
 }
