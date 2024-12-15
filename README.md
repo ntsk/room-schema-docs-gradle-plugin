@@ -7,6 +7,10 @@ A Gradle plugin to automatically generate Entity-Relationship (ER) diagrams in M
 - Generates ER diagrams in [Mermaid](https://mermaid.js.org/syntax/entityRelationshipDiagram.html#entity-relationship-diagrams) syntax based on Room schema JSON files.
 - Outputs diagrams embedded in Markdown files, making it easy to review schema relationships and manage database changes over time.
 
+## Output Example
+When schema JSON files like [sample/schemas](https://github.com/ntsk/room-schema-docs-gradle-plugin/tree/main/sample/schemas/jp.ntsk.room.schema.docs.sample.database.AppDatabase) exist, you can generate Markdown(Mermaid Syntax) documents like [sample/schemas-docs](https://github.com/ntsk/room-schema-docs-gradle-plugin/tree/main/sample/schemas-docs/jp.ntsk.room.schema.docs.sample.database.AppDatabase).
+
+
 ## Getting Started
 
 ### Prerequisites
@@ -29,6 +33,8 @@ room {
     schemaDirectory("$projectDir/schemas")
 }
 ```
+
+refs. https://developer.android.com/training/data-storage/room/migrating-db-versions#set_schema_location_using_room_gradle_plugin
 
 3. Configure the plugin in your `build.gradle.kts`:
 ```kotlin
