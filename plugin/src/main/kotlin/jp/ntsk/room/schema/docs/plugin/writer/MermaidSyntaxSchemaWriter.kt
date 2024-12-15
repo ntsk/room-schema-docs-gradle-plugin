@@ -23,7 +23,20 @@ class MermaidSyntaxSchemaWriter : SchemaWriter {
             entity.foreignKeys.map { foreignKey ->
                 val relationLabel =
                     foreignKey.columns.joinToString(", ") { column -> "FK($column)" }
-                "${foreignKey.table} ||--o{ ${entity.tableName} : \"$relationLabel\""
+
+                val isUnique = entity.indices.any { index ->
+                    index.unique && index.columnNames.containsAll(foreignKey.columns)
+                }
+                val isNullable = foreignKey.columns.any { column ->
+                    val field = entity.fields.find { it.columnName == column }
+                    field?.notNull == false
+                }
+                val relationSyntax = when {
+                    isUnique && !isNullable -> HAS_ONE
+                    isUnique && isNullable -> HAS_ZERO_OR_ONE
+                    else -> HAS_MANY
+                }
+                "${foreignKey.table} $relationSyntax ${entity.tableName} : \"$relationLabel\""
             }
         }.joinToString("\n")
 
@@ -51,5 +64,8 @@ class MermaidSyntaxSchemaWriter : SchemaWriter {
         private const val CODE_SYNTAX_START = "```mermaid"
         private const val CODE_SYNTAX_END = "```"
         private const val ER_DIAGRAM = "erDiagram"
+        private const val HAS_MANY = "||--o{"
+        private const val HAS_ONE = "||--||"
+        private const val HAS_ZERO_OR_ONE = "||--o|"
     }
 }
