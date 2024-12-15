@@ -9,10 +9,12 @@ import androidx.room.migration.AutoMigrationSpec
 import jp.ntsk.room.schema.docs.sample.entity.ProfileEntity
 import jp.ntsk.room.schema.docs.sample.entity.SubTaskEntity
 import jp.ntsk.room.schema.docs.sample.entity.SubscriptionEntity
+import jp.ntsk.room.schema.docs.sample.entity.TagEntity
 import jp.ntsk.room.schema.docs.sample.entity.TaskEntity
+import jp.ntsk.room.schema.docs.sample.entity.TaskTagCrossRef
 import jp.ntsk.room.schema.docs.sample.entity.UserEntity
 
-private const val APP_DB_VERSION = 6
+private const val APP_DB_VERSION = 7
 
 @Database(
     version = APP_DB_VERSION,
@@ -21,7 +23,9 @@ private const val APP_DB_VERSION = 6
         SubTaskEntity::class,
         UserEntity::class,
         ProfileEntity::class,
-        SubscriptionEntity::class
+        SubscriptionEntity::class,
+        TagEntity::class,
+        TaskTagCrossRef::class
     ],
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
@@ -29,6 +33,7 @@ private const val APP_DB_VERSION = 6
         AutoMigration(from = 3, to = 4),
         AutoMigration(from = 4, to = 5),
         AutoMigration(from = 5, to = 6),
+        AutoMigration(from = 6, to = 7),
     ]
 )
 abstract class AppDatabase : RoomDatabase()
