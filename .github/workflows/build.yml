@@ -31,6 +31,9 @@ jobs:
       - name: Build Gradle Plugin
         run: ./gradlew :plugin:build
 
+      - name: Publish Plugin to Maven Local
+        run: ./gradlew :plugin:publishToMavenLocal
+
       - name: Build Sample App (assembleDebug)
         run: ./gradlew :sample:assembleDebug
 
