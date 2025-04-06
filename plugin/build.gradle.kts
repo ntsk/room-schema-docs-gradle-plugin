@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.ShadowJavaPlugin.Companion.shadowJar
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.dsl)
@@ -6,6 +8,7 @@ plugins {
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.gradle.plugin.publish)
     alias(libs.plugins.signing)
+    alias(libs.plugins.gradleup.shadow)
 }
 
 sourceSets {
@@ -46,11 +49,22 @@ gradlePlugin {
     }
 }
 
+tasks.shadowJar {
+    enableRelocation = true
+    archiveClassifier.set("")
+    relocationPrefix = "jp.ntsk.room.schema.docs.plugin.relocated"
+}
+
 dependencies {
     implementation(libs.kotlinx.serialization.json)
 }
 
 publishing {
+    publications {
+        create<MavenPublication>("shadow") {
+            artifact(tasks.named("shadowJar").get())
+        }
+    }
     repositories {
         mavenLocal()
     }
