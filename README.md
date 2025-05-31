@@ -24,7 +24,7 @@ When schema JSON files like [sample/schemas](https://github.com/ntsk/room-schema
 1. Add the plugin to your `build.gradle.kts`:
 ```kotlin
 plugins {
-    id("jp.ntsk.room-schema-docs") version "1.1.0"
+    id("jp.ntsk.room-schema-docs") version "1.2.0"
 }
 ```
 
