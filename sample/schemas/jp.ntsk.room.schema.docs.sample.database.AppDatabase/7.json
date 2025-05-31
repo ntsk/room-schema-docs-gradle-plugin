@@ -35,14 +35,12 @@
           {
             "fieldPath": "authorId",
             "columnName": "author_id",
-            "affinity": "INTEGER",
-            "notNull": false
+            "affinity": "INTEGER"
           },
           {
             "fieldPath": "assigneeId",
             "columnName": "assignee_id",
-            "affinity": "INTEGER",
-            "notNull": false
+            "affinity": "INTEGER"
           },
           {
             "fieldPath": "dueAt",
@@ -190,9 +188,7 @@
           "columnNames": [
             "id"
           ]
-        },
-        "indices": [],
-        "foreignKeys": []
+        }
       },
       {
         "tableName": "profiles",
@@ -273,8 +269,7 @@
           {
             "fieldPath": "userId",
             "columnName": "user_id",
-            "affinity": "INTEGER",
-            "notNull": false
+            "affinity": "INTEGER"
           },
           {
             "fieldPath": "planName",
@@ -336,9 +331,7 @@
           "columnNames": [
             "id"
           ]
-        },
-        "indices": [],
-        "foreignKeys": []
+        }
       },
       {
         "tableName": "TaskTagCrossRef",
@@ -410,7 +403,6 @@
         ]
       }
     ],
-    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
       "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '70a4883a34c2eae3dea999656c4a288e')"
