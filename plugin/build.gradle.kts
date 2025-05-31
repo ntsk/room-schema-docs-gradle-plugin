@@ -29,12 +29,10 @@ kotlin {
 }
 
 group = "jp.ntsk"
-version = "1.1.0"
+version = "1.2.0"
 
 gradlePlugin {
-    @Suppress("UnstableApiUsage")
     website.set("https://github.com/ntsk/room-schema-docs-gradle-plugin")
-    @Suppress("UnstableApiUsage")
     vcsUrl.set("https://github.com/ntsk/room-schema-docs-gradle-plugin")
     plugins {
         create("roomSchemaDocsPlugin") {
@@ -43,7 +41,6 @@ gradlePlugin {
             displayName = "room-schema-docs-gradle-plugin"
             description =
                 "A Gradle plugin to automatically generate Entity-Relationship (ER) diagrams from Android Room database schema JSON files in Mermaid format."
-            @Suppress("UnstableApiUsage")
             tags = listOf("android", "androidx-room")
         }
     }
