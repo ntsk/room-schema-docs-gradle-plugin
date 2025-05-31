@@ -8,5 +8,5 @@ data class Field(
     @SerialName("fieldPath") val fieldPath: String,
     @SerialName("columnName") val columnName: String,
     @SerialName("affinity") val affinity: String,
-    @SerialName("notNull") val notNull: Boolean
+    @SerialName("notNull") val notNull: Boolean = false
 )
