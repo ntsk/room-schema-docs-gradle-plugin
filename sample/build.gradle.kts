@@ -13,7 +13,7 @@ plugins {
 
 android {
     namespace = "jp.ntsk.room.schema.docs"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "jp.ntsk.room.schema.docs"
