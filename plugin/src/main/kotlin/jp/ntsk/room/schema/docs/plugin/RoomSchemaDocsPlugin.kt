@@ -16,11 +16,11 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
             description = "Generate Mermaid ER diagrams from Room schema JSON files."
 
             doLast {
-                val schemaDir = File(extension.schemaDir)
-                val outputDir = File(extension.outputDir)
+                val schemaDir = File(extension.resolveSchemaDir())
+                val outputDir = File(extension.resolveOutputDir())
 
                 if (!schemaDir.exists()) {
-                    throw IllegalArgumentException("Schema directory does not exist: ${extension.schemaDir}")
+                    throw IllegalArgumentException("Schema directory does not exist: ${extension.resolveSchemaDir()}")
                 }
 
                 if (!outputDir.exists()) {
@@ -35,7 +35,7 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
                     .toList()
 
                 if (jsonFiles.isEmpty()) {
-                    throw IllegalArgumentException("No schema files found in directory or subdirectories: ${extension.schemaDir}")
+                    throw IllegalArgumentException("No schema files found in directory or subdirectories: ${extension.resolveSchemaDir()}")
                 }
 
                 jsonFiles
@@ -58,6 +58,28 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
 }
 
 open class RoomSchemaDocsExtension {
+    @Deprecated("Use schemaDirectory() method instead", ReplaceWith("schemaDirectory(value)"))
     var schemaDir: String = "schemas"
+
+    @Deprecated("Use outputDirectory() method instead", ReplaceWith("outputDirectory(value)"))
     var outputDir: String = "docs"
+
+    private var schemaDirectoryValue: String? = null
+    private var outputDirectoryValue: String? = null
+
+    fun schemaDirectory(path: String) {
+        schemaDirectoryValue = path
+    }
+
+    fun outputDirectory(path: String) {
+        outputDirectoryValue = path
+    }
+
+    internal fun resolveSchemaDir(): String {
+        return schemaDirectoryValue ?: schemaDir
+    }
+
+    internal fun resolveOutputDir(): String {
+        return outputDirectoryValue ?: outputDir
+    }
 }

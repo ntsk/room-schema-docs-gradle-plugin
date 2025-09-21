@@ -89,6 +89,6 @@ room {
 }
 
 roomSchemaDocs {
-    schemaDir = "$projectDir/schemas"
-    outputDir = "$projectDir/schemas-docs"
+    schemaDirectory("$projectDir/schemas")
+    outputDirectory("$projectDir/schemas-docs")
 }

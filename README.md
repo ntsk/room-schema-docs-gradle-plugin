@@ -40,8 +40,8 @@ refs. https://developer.android.com/training/data-storage/room/migrating-db-vers
 3. Configure the plugin in your `build.gradle.kts`:
 ```kotlin
 roomSchemaDocs {
-    schemaDir = "$projectDir/schemas"
-    outputDir = "$projectDir/schemas-docs"
+    schemaDirectory("$projectDir/schemas")
+    outputDirectory("$projectDir/schemas-docs")
 }
 ```
 
