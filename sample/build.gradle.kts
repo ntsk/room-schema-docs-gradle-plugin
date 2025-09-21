@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.androidx.room)
-    id("jp.ntsk.room-schema-docs") version "1.3.0"
+    id("jp.ntsk.room-schema-docs") version "1.4.0"
 }
 
 android {
