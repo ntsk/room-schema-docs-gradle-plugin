@@ -53,8 +53,13 @@ tasks.shadowJar {
     archiveClassifier.set("")
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(libs.kotlinx.serialization.json)
+    testImplementation(kotlin("test"))
 }
 
 publishing {
