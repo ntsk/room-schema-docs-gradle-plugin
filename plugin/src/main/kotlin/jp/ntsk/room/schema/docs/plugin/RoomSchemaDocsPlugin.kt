@@ -40,7 +40,7 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
 
                 jsonFiles
                     .forEach { file ->
-                        println(file.toPath())
+                        logger.lifecycle(file.toPath().toString())
 
                         val relativePath = schemaDir.toPath().relativize(file.toPath()).toString()
                         val outputFile = File(outputDir, relativePath.replace(".json", ".md"))
@@ -50,7 +50,7 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
                         val erDiagram = writer.write(roomSchema)
 
                         outputFile.writeText(erDiagram)
-                        println("Generated ER diagram: ${outputFile.absolutePath}")
+                        logger.lifecycle("Generated ER diagram: ${outputFile.absolutePath}")
                     }
             }
         }
