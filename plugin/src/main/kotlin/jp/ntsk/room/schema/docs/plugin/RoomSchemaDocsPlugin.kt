@@ -44,7 +44,7 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
 
                         val relativePath = schemaDir.toPath().relativize(file.toPath()).toString()
                         val outputFile = File(outputDir, relativePath.replace(".json", ".md"))
-                        outputFile.parentFile.mkdirs()
+                        outputFile.parentFile?.mkdirs()
 
                         val roomSchema = serializer.serialize(file)
                         val erDiagram = writer.write(roomSchema)
