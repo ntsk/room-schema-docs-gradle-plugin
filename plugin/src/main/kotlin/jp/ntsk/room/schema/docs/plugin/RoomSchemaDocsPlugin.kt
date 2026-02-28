@@ -58,14 +58,8 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
 }
 
 open class RoomSchemaDocsExtension {
-    @Deprecated("Use schemaDirectory() method instead", ReplaceWith("schemaDirectory(value)"))
-    var schemaDir: String = "schemas"
-
-    @Deprecated("Use outputDirectory() method instead", ReplaceWith("outputDirectory(value)"))
-    var outputDir: String = "docs"
-
-    private var schemaDirectoryValue: String? = null
-    private var outputDirectoryValue: String? = null
+    private var schemaDirectoryValue: String = "schemas"
+    private var outputDirectoryValue: String = "docs"
 
     fun schemaDirectory(path: String) {
         schemaDirectoryValue = path
@@ -76,10 +70,10 @@ open class RoomSchemaDocsExtension {
     }
 
     internal fun resolveSchemaDir(): String {
-        return schemaDirectoryValue ?: schemaDir
+        return schemaDirectoryValue
     }
 
     internal fun resolveOutputDir(): String {
-        return outputDirectoryValue ?: outputDir
+        return outputDirectoryValue
     }
 }
