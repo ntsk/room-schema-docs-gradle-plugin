@@ -1,10 +1,10 @@
 plugins {
     `kotlin-dsl`
-    kotlin("plugin.serialization") version "2.3.0"
+    alias(libs.plugins.kotlin.serialization)
     `maven-publish`
-    id("com.gradle.plugin-publish") version "2.1.0"
+    alias(libs.plugins.gradle.plugin.publish)
     signing
-    id("com.gradleup.shadow") version "9.3.2"
+    alias(libs.plugins.gradleup.shadow)
 }
 
 sourceSets {
@@ -56,7 +56,7 @@ tasks.test {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(kotlin("test"))
 }
 
