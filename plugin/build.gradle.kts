@@ -1,8 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.3.10"
-    kotlin("plugin.serialization") version "2.3.10"
-    id("org.gradle.kotlin.kotlin-dsl") version "6.5.4"
-    `java-gradle-plugin`
+    `kotlin-dsl`
+    kotlin("plugin.serialization") version "2.3.0"
     `maven-publish`
     id("com.gradle.plugin-publish") version "2.1.0"
     signing
