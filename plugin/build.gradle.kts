@@ -43,7 +43,7 @@ gradlePlugin {
 }
 
 tasks.jar {
-    enabled = false
+    archiveClassifier.set("plain")
 }
 
 tasks.shadowJar {
