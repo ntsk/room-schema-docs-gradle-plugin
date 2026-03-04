@@ -1,6 +1,7 @@
 plugins {
-    `kotlin-dsl`
+    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
+    `java-gradle-plugin`
     `maven-publish`
     alias(libs.plugins.gradle.plugin.publish)
     signing

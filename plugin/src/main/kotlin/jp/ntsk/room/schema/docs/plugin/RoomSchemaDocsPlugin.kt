@@ -11,11 +11,11 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
         val extension =
             project.extensions.create("roomSchemaDocs", RoomSchemaDocsExtension::class.java)
 
-        project.tasks.register("generateRoomSchemaDocs") {
-            group = "documentation"
-            description = "Generate Mermaid ER diagrams from Room schema JSON files."
+        project.tasks.register("generateRoomSchemaDocs") { task ->
+            task.group = "documentation"
+            task.description = "Generate Mermaid ER diagrams from Room schema JSON files."
 
-            doLast {
+            task.doLast {
                 val schemaDir = File(extension.resolveSchemaDir())
                 val outputDir = File(extension.resolveOutputDir())
 
@@ -40,7 +40,7 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
 
                 jsonFiles
                     .forEach { file ->
-                        logger.lifecycle(file.toPath().toString())
+                        task.logger.lifecycle(file.toPath().toString())
 
                         val relativePath = schemaDir.toPath().relativize(file.toPath()).toString()
                         val outputFile = File(outputDir, relativePath.replace(".json", ".md"))
@@ -50,7 +50,7 @@ class RoomSchemaDocsPlugin : Plugin<Project> {
                         val erDiagram = writer.write(roomSchema)
 
                         outputFile.writeText(erDiagram)
-                        logger.lifecycle("Generated ER diagram: ${outputFile.absolutePath}")
+                        task.logger.lifecycle("Generated ER diagram: ${outputFile.absolutePath}")
                     }
             }
         }
