@@ -1,12 +1,12 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.dsl)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.java.gradle.plugin)
-    alias(libs.plugins.maven.publish)
-    alias(libs.plugins.gradle.plugin.publish)
-    alias(libs.plugins.signing)
-    alias(libs.plugins.gradleup.shadow)
+    kotlin("jvm") version "2.3.10"
+    kotlin("plugin.serialization") version "2.3.10"
+    id("org.gradle.kotlin.kotlin-dsl") version "6.5.4"
+    `java-gradle-plugin`
+    `maven-publish`
+    id("com.gradle.plugin-publish") version "2.1.0"
+    signing
+    id("com.gradleup.shadow") version "9.3.2"
 }
 
 sourceSets {
@@ -58,7 +58,7 @@ tasks.test {
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization.json)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
     testImplementation(kotlin("test"))
 }
 
