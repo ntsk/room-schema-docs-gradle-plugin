@@ -26,7 +26,7 @@ kotlin {
 }
 
 group = "jp.ntsk"
-version = "1.4.0"
+version = "1.5.0"
 
 gradlePlugin {
     website.set("https://github.com/ntsk/room-schema-docs-gradle-plugin")
