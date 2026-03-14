@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.androidx.room)
     id("jp.ntsk.room-schema-docs")
 }
@@ -48,9 +47,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
@@ -59,10 +56,6 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui.ui)
     implementation(libs.androidx.compose.material.material3)
-    implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.core)
@@ -71,8 +64,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
-
-    implementation(libs.kotlinx.serialization.core)
 
     testImplementation(libs.junit)
     debugImplementation(libs.androidx.ui.tooling)
