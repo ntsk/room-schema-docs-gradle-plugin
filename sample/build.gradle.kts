@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.androidx.room)
     id("jp.ntsk.room-schema-docs")
 }
@@ -40,22 +39,11 @@ android {
             jvmTarget = JvmTarget.JVM_17
         }
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui.ui)
-    implementation(libs.androidx.compose.material.material3)
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.core)
@@ -66,12 +54,8 @@ dependencies {
     ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
 }
 
 room {
