@@ -28,8 +28,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Publish Plugin to Maven Local
-        run: PLUGIN_ONLY=true ./gradlew :plugin:publishToMavenLocal
+      - name: Build Plugin
+        run: ./gradlew -p plugin build
 
       - name: Build Sample App (assembleDebug)
         run: ./gradlew :sample:assembleDebug

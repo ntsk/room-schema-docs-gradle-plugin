@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.dsl)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.java.gradle.plugin)
-    alias(libs.plugins.maven.publish)
+    `java-gradle-plugin`
+    `maven-publish`
     alias(libs.plugins.gradle.plugin.publish)
-    alias(libs.plugins.signing)
+    signing
     alias(libs.plugins.gradleup.shadow)
 }
 
@@ -45,7 +44,7 @@ gradlePlugin {
 }
 
 tasks.jar {
-    enabled = false
+    archiveClassifier.set("plain")
 }
 
 tasks.shadowJar {

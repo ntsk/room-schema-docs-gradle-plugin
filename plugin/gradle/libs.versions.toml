@@ -1,0 +1,14 @@
+[versions]
+kotlin = "2.3.10"
+kotlinSerialization = "1.10.0"
+gradle-plugin-publish = "2.1.0"
+shadow = "9.3.2"
+
+[libraries]
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "gradle-plugin-publish" }
+gradleup-shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
