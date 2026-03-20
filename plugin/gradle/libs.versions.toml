@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.3.10"
 kotlinSerialization = "1.10.0"
-gradle-plugin-publish = "2.1.0"
+gradle-plugin-publish = "2.1.1"
 shadow = "9.4.0"
 
 [libraries]
