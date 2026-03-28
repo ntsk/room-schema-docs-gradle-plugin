@@ -2,7 +2,7 @@
 kotlin = "2.3.20"
 kotlinSerialization = "1.10.0"
 gradle-plugin-publish = "2.1.1"
-shadow = "9.4.0"
+shadow = "9.4.1"
 
 [libraries]
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
