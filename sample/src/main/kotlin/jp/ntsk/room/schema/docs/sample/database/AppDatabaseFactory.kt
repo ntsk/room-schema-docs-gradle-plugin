@@ -1,7 +1,7 @@
 package jp.ntsk.room.schema.docs.sample.database
 
 import android.content.Context
-import androidx.room.Room
+import androidx.room3.Room
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
