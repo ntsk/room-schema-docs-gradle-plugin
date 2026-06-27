@@ -8,7 +8,7 @@ espressoCore = "3.7.0"
 activity = "1.13.0"
 room = "2.8.4"
 ksp = "2.3.9"
-hilt = "2.59.2"
+hilt = "2.60"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
