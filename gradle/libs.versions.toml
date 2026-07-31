@@ -6,7 +6,7 @@ junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 activity = "1.13.0"
-room = "3.0.0"
+room = "3.0.1"
 ksp = "2.3.10"
 hilt = "2.60.1"
 
